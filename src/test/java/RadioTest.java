@@ -6,6 +6,197 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
 
+    //вручную задаваемое кол-во станций
+
+    @Test
+    public void testEnterMaxStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(30);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testBeforeEnterMaxStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+
+        int expected = 29;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAfterEnterMaxStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(31);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEnterMiddleStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(15);
+
+        int expected = 15;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEnterMinStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(0);
+
+        int expected =0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testBeforeEnterMinStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(-1);
+
+        int expected =0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAfterEnterMinStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(1);
+
+        int expected =1;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNextEnterStation() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(15);
+
+        radio.nextStation();
+
+        int expected = 16;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNextEnterStationUntilHightBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+
+        radio.nextStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNextEnterStationHightBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(30);
+
+        radio.nextStation();
+
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNextEnterStationLowBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(0);
+
+        radio.nextStation();
+
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrevEnterStationLowBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(0);
+
+        radio.prevStation();
+
+        int expected = 29;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrevEnterStationHightBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(30);
+
+        radio.prevStation();
+
+        int expected = 29;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrevEnterStationMiddle() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(15);
+
+        radio.prevStation();
+
+        int expected = 14;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrevEnterStationBeforeLowBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(1);
+
+        radio.prevStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testPrevEnterStationBeforeHighBorder() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStation(29);
+
+        radio.prevStation();
+
+        int expected = 28;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    //кол-во станций по умолчанию
+
     @Test
     public void testMiddleStation() {
         Radio radio = new Radio();
